@@ -91,7 +91,7 @@ describe('index.js', function () {
   })
 
   describe('myFind', function() {
-    function findCBGenerator(target) {
+    function findDataGenerator(target) {
       return (function(currEl) { return target === currEl })
     }
 
@@ -101,21 +101,21 @@ describe('index.js', function () {
     const objArr = [{a: 'a'}, objB]
 
     it('returns the value if found', function () {
-      expect(myFind(intArr, findCBGenerator(4))).to.equal(4)
-      expect(myFind(strArr, findCBGenerator("waychillgoldeneye"))).to.equal("waychillgoldeneye")
-      expect(myFind(objArr, findCBGenerator(objB))).to.equal(objB)
+      expect(myFind(intArr, findDataGenerator(4))).to.equal(4)
+      expect(myFind(strArr, findDataGenerator("waychillgoldeneye"))).to.equal("waychillgoldeneye")
+      expect(myFind(objArr, findDataGenerator(objB))).to.equal(objB)
     })
 
     it('does not traverse the whole array if the value is found early', function () {
-      const spy = chai.spy(findCBGenerator(0))
+      const spy = chai.spy(findDataGenerator(0))
       myFind(intArr, spy)
       expect(spy).to.have.been.called.exactly(3)
     })
 
     it('returns undefined if the value is not present', function () {
-      expect(myFind(intArr, findCBGenerator(7))).to.equal(undefined)
-      expect(myFind(strArr, findCBGenerator("maxwellisbestmax"))).to.equal(undefined)
-      expect(myFind(objArr, findCBGenerator({c: 'c'}))).to.equal(undefined)
+      expect(myFind(intArr, findDataGenerator(7))).to.equal(undefined)
+      expect(myFind(strArr, findDataGenerator("maxwellisbestmax"))).to.equal(undefined)
+      expect(myFind(objArr, findDataGenerator({c: 'c'}))).to.equal(undefined)
     })
 
   })
@@ -124,8 +124,8 @@ describe('index.js', function () {
     const testArr = [6, 11, 5, 12, 17, 100, 9, 1, -8]
     const testObj = { two: 2, three: 3, five: 5, seven: 7}
 
-    function excluder(currEl) {
-      return (currEl > 10)
+    function excluder(currElem) {
+      return (currElem > 10)
     }
 
     it('correctly filters for values that the callback evaluates as true', function () {
